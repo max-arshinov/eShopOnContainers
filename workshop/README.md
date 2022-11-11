@@ -4,4 +4,5 @@
 4. Run docker-compose
 5. Kompose
 6. Helm
-7. Azure
+-------------
+7. DLC: Azure? - buffer
