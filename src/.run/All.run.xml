@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All" type="CompoundRunConfigurationType">
+    <toRun name="Basket.API: Microsoft.eShopOnContainers.Services.Basket.API" type="LaunchSettings" />
+    <toRun name="Catalog.API: Microsoft.eShopOnContainers.Services.Catalog.API" type="LaunchSettings" />
+    <toRun name="Identity.API: eShopOnContainers.Identity" type="LaunchSettings" />
+    <toRun name="Mobile.Shopping.HttpAggregator: PurchaseForMvc" type="LaunchSettings" />
+    <toRun name="Ordering.API: Microsoft.eShopOnContainers.Services.Ordering.API" type="LaunchSettings" />
+    <toRun name="Ordering.BackgroundTasks" type="LaunchSettings" />
+    <toRun name="Ordering.SignalrHub" type="LaunchSettings" />
+    <toRun name="Payment.API" type="LaunchSettings" />
+    <toRun name="Web.Shopping.HttpAggregator: PurchaseForMvc" type="LaunchSettings" />
+    <toRun name="WebMVC: Microsoft.eShopOnContainers.WebMVC" type="LaunchSettings" />
+    <toRun name="WebSPA" type="LaunchSettings" />
+    <toRun name="WebStatus" type="LaunchSettings" />
+    <toRun name="WebhookClient" type="LaunchSettings" />
+    <toRun name="Webhooks.API" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>
