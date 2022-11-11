@@ -2,7 +2,7 @@
   "profiles": {
     "Microsoft.eShopOnContainers.Services.Basket.API": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "http://localhost:55103/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
