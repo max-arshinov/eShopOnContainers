@@ -1,134 +1,135 @@
 version: '3.4'
+name: "eshop"
 
 services:
-  seq:
+  eshop-seq:
     image: datalust/seq:latest
 
-  sqldata:
-    image: mcr.microsoft.com/mssql/server:2019-latest 
+  eshop-sqldata:
+    image: mcr.microsoft.com/azure-sql-edge:latest 
 
-  nosqldata:
+  eshop-nosqldata:
     image: mongo
 
-  basketdata:
+  eshop-basketdata:
     image: redis:alpine
 
-  rabbitmq:
+  eshop-rabbitmq:
     image: rabbitmq:3-management-alpine
 
-  identity-api:
+  eshop-identity-api:
     image: ${REGISTRY:-eshop}/identity.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Identity/Identity.API/Dockerfile
     depends_on:
-      - sqldata
+      - eshop-sqldata
 
-  basket-api:
+  eshop-basket-api:
     image: ${REGISTRY:-eshop}/basket.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
     depends_on:
-      - basketdata
-      - identity-api
-      - rabbitmq
+      - eshop-basketdata
+      - eshop-identity-api
+      - eshop-rabbitmq
 
-  catalog-api:
+  eshop-catalog-api:
     image: ${REGISTRY:-eshop}/catalog.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
     depends_on:
-      - sqldata
-      - rabbitmq
+      - eshop-sqldata
+      - eshop-rabbitmq
 
-  ordering-api:
+  eshop-ordering-api:
     image: ${REGISTRY:-eshop}/ordering.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.API/Dockerfile
     depends_on:
-      - sqldata
-      - rabbitmq
+      - eshop-sqldata
+      - eshop-rabbitmq
 
-  ordering-backgroundtasks:
+  eshop-ordering-backgroundtasks:
     image: ${REGISTRY:-eshop}/ordering.backgroundtasks:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.BackgroundTasks/Dockerfile
     depends_on:
-      - sqldata
-      - rabbitmq
+      - eshop-sqldata
+      - eshop-rabbitmq
 
-  payment-api:
+  eshop-payment-api:
     image: ${REGISTRY:-eshop}/payment.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Payment/Payment.API/Dockerfile
     depends_on:
-      - rabbitmq
+      - eshop-rabbitmq
 
-  webhooks-api:
+  eshop-webhooks-api:
     image: ${REGISTRY:-eshop}/webhooks.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Webhooks/Webhooks.API/Dockerfile
     depends_on:
-      - sqldata
+      - eshop-sqldata
 
-  mobileshoppingapigw:
+  eshop-mobileshoppingapigw:
     image: envoyproxy/envoy:v1.11.1
 
-  mobileshoppingagg:
+  eshop-mobileshoppingagg:
     image: ${REGISTRY:-eshop}/mobileshoppingagg:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateways/Mobile.Bff.Shopping/aggregator/Dockerfile
     depends_on:
-      - nosqldata
-      - sqldata
-      - identity-api
-      - rabbitmq
-      - ordering-api
-      - catalog-api
-      - basket-api
+      - eshop-nosqldata
+      - eshop-sqldata
+      - eshop-identity-api
+      - eshop-rabbitmq
+      - eshop-ordering-api
+      - eshop-catalog-api
+      - eshop-basket-api
 
-  webshoppingagg:
+  eshop-webshoppingagg:
     image: ${REGISTRY:-eshop}/webshoppingagg:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
     depends_on:
-      - nosqldata
-      - sqldata
-      - identity-api
-      - rabbitmq
-      - ordering-api
-      - catalog-api
-      - basket-api
+      - eshop-nosqldata
+      - eshop-sqldata
+      - eshop-identity-api
+      - eshop-rabbitmq
+      - eshop-ordering-api
+      - eshop-catalog-api
+      - eshop-basket-api
 
-  ordering-signalrhub:
+  eshop-ordering-signalrhub:
     image: ${REGISTRY:-eshop}/ordering.signalrhub:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.SignalrHub/Dockerfile
     depends_on:
-      - nosqldata
-      - sqldata
-      - identity-api
-      - rabbitmq
-      - ordering-api
-      - catalog-api
-      - basket-api
+      - eshop-nosqldata
+      - eshop-sqldata
+      - eshop-identity-api
+      - eshop-rabbitmq
+      - eshop-ordering-api
+      - eshop-catalog-api
+      - eshop-basket-api
 
-  webstatus:
+  eshop-webstatus:
     image: ${REGISTRY:-eshop}/webstatus:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Web/WebStatus/Dockerfile
 
-  webspa:
+  eshop-webspa:
     image: ${REGISTRY:-eshop}/webspa:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
@@ -136,25 +137,25 @@ services:
       args:
         NODE_IMAGE: ${NODE_IMAGE:-node:12.0}
     depends_on:
-      - webshoppingagg
-      - webshoppingapigw
+      - eshop-webshoppingagg
+      - eshop-webshoppingapigw
 
-  webmvc:
+  eshop-webmvc:
     image: ${REGISTRY:-eshop}/webmvc:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Web/WebMVC/Dockerfile
     depends_on:
-      - webshoppingagg
-      - webshoppingapigw
+      - eshop-webshoppingagg
+      - eshop-webshoppingapigw
 
-  webhooks-client:
+  eshop-webhooks-client:
     image: ${REGISTRY:-eshop}/webhooks.client:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Web/WebhookClient/Dockerfile
     depends_on:
-      - webhooks-api
+      - eshop-webhooks-api
 
-  webshoppingapigw:
+  eshop-webshoppingapigw:
     image: envoyproxy/envoy:v1.11.1

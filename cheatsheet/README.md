@@ -1,3 +1,9 @@
+## Docker
+
+docker pull mcr.microsoft.com/azure-sql-edge
+docker run --cap-add SYS_PTRACE -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=Pass@word' -p 5433:1433 --name azuresqledge -d mcr.microsoft.com/azure-sql-edge
+
+## K8S
 | Action                                          | Command                                                                                                                                  |
 |-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | aaa                                             |

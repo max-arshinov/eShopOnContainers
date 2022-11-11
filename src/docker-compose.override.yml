@@ -7,13 +7,13 @@ version: '3.4'
 # An external IP or DNS name has to be used (instead localhost and the 10.0.75.1 IP) when testing the Web apps and the Xamarin apps from remote machines/devices using the same WiFi, for instance.
 
 services:
-  seq:
+  eshop-seq:
     environment:
       - ACCEPT_EULA=Y
     ports:
       - "5340:80"
 
-  sqldata:
+  eshop-sqldata:
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
@@ -22,23 +22,23 @@ services:
     volumes:
       - eshop-sqldata:/var/opt/mssql
 
-  nosqldata:
+  eshop-nosqldata:
     ports:
       - "27017:27017"
     volumes:
       - eshop-nosqldata:/data/db
 
-  basketdata:
+  eshop-basketdata:
     ports:
       - "6379:6379"
     volumes:
       - eshop-basketdata:/data
-  rabbitmq:
+  eshop-rabbitmq:
     ports:
       - "15672:15672"
       - "5672:5672"
 
-  identity-api:
+  eshop-identity-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -58,7 +58,7 @@ services:
     ports:
       - "5105:80"
 
-  basket-api:
+  eshop-basket-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -79,7 +79,7 @@ services:
       - "5103:80"
       - "9103:81"
 
-  catalog-api:
+  eshop-catalog-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
@@ -101,7 +101,7 @@ services:
       - "5101:80"
       - "9101:81"
 
-  ordering-api:
+  eshop-ordering-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -126,7 +126,7 @@ services:
       - "5102:80"
       - "9102:81"
 
-  ordering-backgroundtasks:
+  eshop-ordering-backgroundtasks:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -145,7 +145,7 @@ services:
     ports:
       - "5111:80"
 
-  payment-api:
+  eshop-payment-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -160,7 +160,7 @@ services:
     ports:
       - "5108:80"
 
-  webhooks-api:
+  eshop-webhooks-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -173,21 +173,21 @@ services:
     ports:
       - "5113:80"
 
-  mobileshoppingapigw:
+  eshop-mobileshoppingapigw:
     volumes:
       - ./ApiGateways/Envoy/config/mobileshopping:/etc/envoy
     ports:
     - "5200:80"
     - "15200:8001"
 
-  webshoppingapigw:
+  eshop-webshoppingapigw:
     volumes:
       - ./ApiGateways/Envoy/config/webshopping:/etc/envoy
     ports:
     - "5202:80"
     - "15202:8001"
 
-  mobileshoppingagg:
+  eshop-mobileshoppingagg:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - urls__basket=http://basket-api
@@ -206,7 +206,7 @@ services:
     ports:
       - "5120:80"
 
-  webshoppingagg:
+  eshop-webshoppingagg:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - urls__basket=http://basket-api
@@ -225,7 +225,7 @@ services:
     ports:
       - "5121:80"
 
-  ordering-signalrhub:
+  eshop-ordering-signalrhub:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -239,7 +239,7 @@ services:
     ports:
       - "5112:80"
 
-  webstatus:
+  eshop-webstatus:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -270,7 +270,7 @@ services:
     ports:
       - "5107:80"
 
-  webspa:
+  eshop-webspa:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -284,7 +284,7 @@ services:
     ports:
       - "5104:80"
 
-  webmvc:
+  eshop-webmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -299,7 +299,7 @@ services:
     ports:
       - "5100:80"
 
-  webhooks-client:
+  eshop-webhooks-client:
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - Token=6168DB8D-DC58-4094-AF24-483278923590      # Webhooks are registered with this token (any value is valid) but the client won't check it
