@@ -181,6 +181,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{9384C2E0-594
 		k8s\eshop-catalog-api-service.yaml = k8s\eshop-catalog-api-service.yaml
 		k8s\eshop-basketdata-service.yaml = k8s\eshop-basketdata-service.yaml
 		k8s\eshop-basket-api-service.yaml = k8s\eshop-basket-api-service.yaml
+		k8s\eshop-webspa-ingress.yaml = k8s\eshop-webspa-ingress.yaml
 	EndProjectSection
 EndProject
 Global

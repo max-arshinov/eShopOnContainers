@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+    kompose.service.expose: eshop-webspa.localdev.me
+    kompose.service.expose.ingress-class-name: nginx
+    kompose.service.expose.tls-secret: example-secret
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: eshop-webspa
+  name: eshop-webspa
+spec:
+  ports:
+    - name: "5104"
+      port: 5104
+      targetPort: 80
+  selector:
+    io.kompose.service: eshop-webspa
+status:
+  loadBalancer: {}

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: eshop-webhooks-client
+  name: eshop-webhooks-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: eshop-webhooks-client
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: eshop-webhooks-client
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:80
+            - name: CallBackUrl
+              value: http://:5114
+            - name: IdentityUrl
+              value: http://:5105
+            - name: SelfUrl
+              value: http://webhooks-client/
+            - name: Token
+              value: 6168DB8D-DC58-4094-AF24-483278923590
+            - name: WebhooksUrl
+              value: http://webhooks-api
+          image: eshop/webhooks.client:linux-latest
+          name: eshop-webhooks-client
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}

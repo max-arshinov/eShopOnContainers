@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: eshop-identity-api
+  name: eshop-identity-api
+spec:
+  ports:
+    - name: "5105"
+      port: 5105
+      targetPort: 80
+  selector:
+    io.kompose.service: eshop-identity-api
+status:
+  loadBalancer: {}

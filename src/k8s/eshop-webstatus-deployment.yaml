@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: eshop-webstatus
+  name: eshop-webstatus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: eshop-webstatus
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: eshop-webstatus
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:80
+            - name: ApplicationInsights__InstrumentationKey
+            - name: HealthChecksUI__HealthChecks__0__Name
+              value: WebMVC HTTP Check
+            - name: HealthChecksUI__HealthChecks__0__Uri
+              value: http://webmvc/hc
+            - name: HealthChecksUI__HealthChecks__10__Name
+              value: Ordering HTTP Background Check
+            - name: HealthChecksUI__HealthChecks__10__Uri
+              value: http://ordering-backgroundtasks/hc
+            - name: HealthChecksUI__HealthChecks__1__Name
+              value: WebSPA HTTP Check
+            - name: HealthChecksUI__HealthChecks__1__Uri
+              value: http://webspa/hc
+            - name: HealthChecksUI__HealthChecks__2__Name
+              value: Web Shopping Aggregator GW HTTP Check
+            - name: HealthChecksUI__HealthChecks__2__Uri
+              value: http://webshoppingagg/hc
+            - name: HealthChecksUI__HealthChecks__3__Name
+              value: Mobile Shopping Aggregator HTTP Check
+            - name: HealthChecksUI__HealthChecks__3__Uri
+              value: http://mobileshoppingagg/hc
+            - name: HealthChecksUI__HealthChecks__4__Name
+              value: Ordering HTTP Check
+            - name: HealthChecksUI__HealthChecks__4__Uri
+              value: http://ordering-api/hc
+            - name: HealthChecksUI__HealthChecks__5__Name
+              value: Basket HTTP Check
+            - name: HealthChecksUI__HealthChecks__5__Uri
+              value: http://basket-api/hc
+            - name: HealthChecksUI__HealthChecks__6__Name
+              value: Catalog HTTP Check
+            - name: HealthChecksUI__HealthChecks__6__Uri
+              value: http://catalog-api/hc
+            - name: HealthChecksUI__HealthChecks__7__Name
+              value: Identity HTTP Check
+            - name: HealthChecksUI__HealthChecks__7__Uri
+              value: http://identity-api/hc
+            - name: HealthChecksUI__HealthChecks__8__Name
+              value: Payments HTTP Check
+            - name: HealthChecksUI__HealthChecks__8__Uri
+              value: http://payment-api/hc
+            - name: HealthChecksUI__HealthChecks__9__Name
+              value: Ordering SignalRHub HTTP Check
+            - name: HealthChecksUI__HealthChecks__9__Uri
+              value: http://ordering-signalrhub/hc
+            - name: OrchestratorType
+          image: eshop/webstatus:linux-latest
+          name: eshop-webstatus
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}

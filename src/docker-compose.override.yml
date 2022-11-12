@@ -283,7 +283,11 @@ services:
       - SignalrHubUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5202
     ports:
       - "5104:80"
-
+    labels:
+      kompose.service.expose: "eshop-webspa.localdev.me"
+      kompose.service.expose.ingress-class-name: "nginx"       
+      kompose.service.expose.tls-secret: "example-secret"
+      
   eshop-webmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

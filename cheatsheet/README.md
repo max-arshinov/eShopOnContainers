@@ -15,6 +15,8 @@
 | To check the public service exposed             | `kubectl get ing`                                                                                                                        |
 | Check Deployment Status                         | `kubectl get deployment  `                                                                                                               |
 
+docker-compose config > docker-compose-resolved.yaml && kompose convert -f docker-compose-resolved.yaml
+
 # Helm
 | Action                              | Command                                                                                              |
 |-------------------------------------|------------------------------------------------------------------------------------------------------|

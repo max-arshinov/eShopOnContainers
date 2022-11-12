@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: eshop-nosqldata
+  name: eshop-nosqldata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: eshop-nosqldata
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: eshop-nosqldata
+    spec:
+      containers:
+        - image: mongo
+          name: eshop-nosqldata
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/db
+              name: eshop-nosqldata
+      restartPolicy: Always
+      volumes:
+        - name: eshop-nosqldata
+          persistentVolumeClaim:
+            claimName: eshop-nosqldata
+status: {}

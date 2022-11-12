@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: eshop-identity-api
+  name: eshop-identity-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: eshop-identity-api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: eshop-identity-api
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:80
+            - name: ApplicationInsights__InstrumentationKey
+            - name: BasketApiClient
+              value: http://:5103
+            - name: ConnectionString
+              value: Server=eshop-sqldata;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=Pass@word
+            - name: MobileShoppingAggClient
+              value: http://:5120
+            - name: MvcClient
+              value: http://:5100
+            - name: OrchestratorType
+            - name: OrderingApiClient
+              value: http://:5102
+            - name: SpaClient
+              value: http://:5104
+            - name: UseCustomizationData
+              value: "True"
+            - name: WebShoppingAggClient
+              value: http://:5121
+            - name: WebhooksApiClient
+              value: http://:5113
+            - name: WebhooksWebClient
+              value: http://:5114
+            - name: XamarinCallback
+              value: http://:5105/xamarincallback
+          image: eshop/identity.api:linux-latest
+          name: eshop-identity-api
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}
