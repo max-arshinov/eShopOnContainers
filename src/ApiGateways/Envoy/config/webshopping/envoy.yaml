@@ -29,32 +29,32 @@ static_resources:
                 route:
                   auto_host_rewrite: true
                   prefix_rewrite: "/catalog-api/"
-                  cluster: catalog
+                  cluster: eshop-catalog
               - name: "c-long"
                 match:
                   prefix: "/catalog-api/"
                 route:
                   auto_host_rewrite: true
-                  cluster: catalog
+                  cluster: eshop-catalog
               - name: "o-short"
                 match:
                   prefix: "/o/"
                 route:
                   auto_host_rewrite: true
                   prefix_rewrite: "/ordering-api/"
-                  cluster: ordering
+                  cluster: eshop-ordering
               - name: "o-long"
                 match:
                   prefix: "/ordering-api/"
                 route:
                   auto_host_rewrite: true
-                  cluster: ordering
+                  cluster: eshop-ordering
               - name: "h-long"
                 match:
                   prefix: "/hub/notificationhub"
                 route:
                   auto_host_rewrite: true
-                  cluster: signalr-hub
+                  cluster: eshop-signalr-hub
                   timeout: 300s
                   upgrade_configs:
                     upgrade_type: "websocket"
@@ -65,20 +65,20 @@ static_resources:
                 route:
                   auto_host_rewrite: true
                   prefix_rewrite: "/basket-api/"
-                  cluster: basket
+                  cluster: eshop-basket
               - name: "b-long"
                 match:
                   prefix: "/basket-api/"
                 route:
                   auto_host_rewrite: true
-                  cluster: basket
+                  cluster: eshop-basket
               - name: "agg"
                 match:
                   prefix: "/"
                 route:
                   auto_host_rewrite: true
                   prefix_rewrite: "/"
-                  cluster: shoppingagg
+                  cluster: eshop-shoppingagg
           http_filters:
           - name: envoy.router
           access_log:
@@ -100,43 +100,43 @@ static_resources:
                 upstream_local_address: "%UPSTREAM_LOCAL_ADDRESS%"
               path: "/tmp/access.log"
   clusters:
-  - name: shoppingagg
+  - name: eshop-shoppingagg
     connect_timeout: 0.25s
     type: strict_dns
     lb_policy: round_robin
     hosts:
     - socket_address:
-        address: webshoppingagg
+        address: eshop-webshoppingagg
         port_value: 80
-  - name: catalog
+  - name: eshop-catalog
     connect_timeout: 0.25s
     type: strict_dns
     lb_policy: round_robin
     hosts:
     - socket_address:
-        address: catalog-api
+        address: eshop-catalog-api
         port_value: 80
-  - name: basket
+  - name: eshop-basket
     connect_timeout: 0.25s
     type: strict_dns
     lb_policy: round_robin
     hosts:
     - socket_address:
-        address: basket-api
+        address: eshop-basket-api
         port_value: 80
-  - name: ordering
+  - name: eshop-ordering
     connect_timeout: 0.25s
     type: strict_dns
     lb_policy: round_robin
     hosts:
     - socket_address:
-        address: ordering-api
+        address: eshop-ordering-api
         port_value: 80
-  - name: signalr-hub
+  - name: eshop-signalr-hub
     connect_timeout: 0.25s
     type: strict_dns
     lb_policy: round_robin
     hosts:
     - socket_address:
-        address: ordering-signalrhub
+        address: eshop-ordering-signalrhub
         port_value: 80

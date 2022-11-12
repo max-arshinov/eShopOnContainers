@@ -15,7 +15,7 @@ version: '3.4'
 
 services:
 
-  basket-api:
+  eshop-basket-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -33,11 +33,11 @@ services:
     ports:
       - "80"   # The API Gateway redirects and access through the internal port (80).
 
-  catalog-api:
+  eshop-catalog-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=eshop-sqldata;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
       - PicBaseUrl=${ESHOP_STORAGE_CATALOG_URL}
       - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
       - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
@@ -52,13 +52,13 @@ services:
     ports:
       - "80"   # The API Gateway redirects and access through the internal port (80).
 
-  identity-api:
+  eshop-identity-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - SpaClient=http://${ESHOP_PROD_EXTERNAL_DNS_NAME_OR_IP}:5104
       - XamarinCallback=http://${ESHOP_PROD_EXTERNAL_DNS_NAME_OR_IP}:5105/xamarincallback      #localhost do not work for UWP login, so we have to use "external" IP always
-      - ConnectionString=${ESHOP_AZURE_IDENTITY_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=${ESHOP_AZURE_IDENTITY_DB:-Server=eshop-sqldata;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=Pass@word}
       - MvcClient=http://${ESHOP_PROD_EXTERNAL_DNS_NAME_OR_IP}:5100              #Local: You need to open your local dev-machine firewall at range 5100-5110.
       - BasketApiClient=http://${ESHOP_PROD_EXTERNAL_DNS_NAME_OR_IP}:5103
       - OrderingApiClient=http://${ESHOP_PROD_EXTERNAL_DNS_NAME_OR_IP}:5102
@@ -70,11 +70,11 @@ services:
     ports:
       - "5105:80"
 
-  ordering-api:
+  eshop-ordering-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_ORDERING_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=${ESHOP_AZURE_ORDERING_DB:-Server=eshop-sqldata;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word}
       - identityUrl=http://identity-api              #Local: You need to open your local dev-machine firewall at range 5100-5110.
       - IdentityUrlExternal=http://${ESHOP_PROD_EXTERNAL_DNS_NAME_OR_IP}:5105
       - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
@@ -89,11 +89,11 @@ services:
     ports:
       - "80"   # The API Gateway redirects and access through the internal port (80).
 
-  ordering.backgroundtasks:
+  eshop-ordering.backgroundtasks:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_ORDERING_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=${ESHOP_AZURE_ORDERING_DB:-Server=eshop-sqldata;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word}
       - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
       - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
       - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
@@ -107,7 +107,7 @@ services:
     ports:
       - "5111:80"
 
-  webspa:
+  eshop-webspa:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -124,7 +124,7 @@ services:
     ports:
       - "5104:80"
 
-  webmvc:
+  eshop-webmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -142,7 +142,7 @@ services:
     ports:
       - "5100:80"
 
-  webstatus:
+  eshop-webstatus:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -158,7 +158,7 @@ services:
     ports:
       - "5107:80"
 
-  payment-api:
+  eshop-payment-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -171,27 +171,27 @@ services:
     ports:
       - "80"   # The API Gateway redirects and access through the internal port (80).
 
-  sqldata:
+  eshop-sqldata:
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
       - "5433:1433"    # Important: In a production environment your should remove the external port
 
-  nosqldata:
+  eshop-nosqldata:
     ports:
       - "27017:27017"  # Important: In a production environment your should remove the external port
 
-  basket.data:
+  eshop-basket.data:
     ports:
       - "6379:6379"    # Important: In a production environment your should remove the external port
 
-  rabbitmq:
+  eshop-rabbitmq:
     ports:
       - "15672:15672"  # Important: In a production environment your should remove the external port
       - "5672:5672"    # Important: In a production environment your should remove the external port
 
-  mobileshoppingapigw:
+  eshop-mobileshoppingapigw:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - IdentityUrl=http://identity-api              #Local: You need to open your local dev-machine firewall at range 5100-5110.
@@ -201,7 +201,7 @@ services:
     volumes:
       - ./ApiGateways/Mobile.Bff.Shopping/apigw:/app/configuration
 
-  webshoppingapigw:
+  eshop-webshoppingapigw:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - IdentityUrl=http://identity-api              #Local: You need to open your local dev-machine firewall at range 5100-5110.
@@ -211,7 +211,7 @@ services:
     volumes:
       - ./ApiGateways/Web.Bff.Shopping/apigw:/app/configuration
 
-  mobileshoppingagg:
+  eshop-mobileshoppingagg:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - urls__basket=http://basket-api
@@ -222,7 +222,7 @@ services:
       - "80"   # Important: In a production environment your should remove the external port (5120) kept here for microservice debugging purposes.
                     # The API Gateway redirects and access through the internal port (80).
 
-  webshoppingagg:
+  eshop-webshoppingagg:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - urls__basket=http://basket-api

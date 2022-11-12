@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FEA0C318-FFED-4D39-8781-265718CA43DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{932D8224-11F6-4D07-B109-DA28AD288A63}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AF739CD-81D8-428D-A08A-0A58372DEBF6}"
 	ProjectSection(SolutionItems) = preProject
@@ -127,6 +130,57 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webshopping-local", "webshopping-local", "{23C9581B-F153-416A-BE40-202BFED655C2}"
 	ProjectSection(SolutionItems) = preProject
 		ApiGateways\Envoy\config\webshopping-local\envoy.yaml = ApiGateways\Envoy\config\webshopping-local\envoy.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{9384C2E0-5948-4526-B5DE-E08B0723543D}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\eshop-webstatus-deployment.yaml = k8s\eshop-webstatus-deployment.yaml
+		k8s\eshop-webspa-deployment.yaml = k8s\eshop-webspa-deployment.yaml
+		k8s\eshop-webshoppingapigw-claim0-persistentvolumeclaim.yaml = k8s\eshop-webshoppingapigw-claim0-persistentvolumeclaim.yaml
+		k8s\eshop-webshoppingapigw-deployment.yaml = k8s\eshop-webshoppingapigw-deployment.yaml
+		k8s\eshop-webshoppingagg-deployment.yaml = k8s\eshop-webshoppingagg-deployment.yaml
+		k8s\eshop-webmvc-deployment.yaml = k8s\eshop-webmvc-deployment.yaml
+		k8s\eshop-webhooks-client-deployment.yaml = k8s\eshop-webhooks-client-deployment.yaml
+		k8s\eshop-webhooks-api-deployment.yaml = k8s\eshop-webhooks-api-deployment.yaml
+		k8s\eshop-sqldata-persistentvolumeclaim.yaml = k8s\eshop-sqldata-persistentvolumeclaim.yaml
+		k8s\eshop-sqldata-deployment.yaml = k8s\eshop-sqldata-deployment.yaml
+		k8s\eshop-seq-deployment.yaml = k8s\eshop-seq-deployment.yaml
+		k8s\eshop-rabbitmq-deployment.yaml = k8s\eshop-rabbitmq-deployment.yaml
+		k8s\eshop-payment-api-deployment.yaml = k8s\eshop-payment-api-deployment.yaml
+		k8s\eshop-ordering-signalrhub-deployment.yaml = k8s\eshop-ordering-signalrhub-deployment.yaml
+		k8s\eshop-ordering-backgroundtasks-deployment.yaml = k8s\eshop-ordering-backgroundtasks-deployment.yaml
+		k8s\eshop-ordering-api-deployment.yaml = k8s\eshop-ordering-api-deployment.yaml
+		k8s\eshop-nosqldata-persistentvolumeclaim.yaml = k8s\eshop-nosqldata-persistentvolumeclaim.yaml
+		k8s\eshop-nosqldata-deployment.yaml = k8s\eshop-nosqldata-deployment.yaml
+		k8s\eshop-mobileshoppingapigw-claim0-persistentvolumeclaim.yaml = k8s\eshop-mobileshoppingapigw-claim0-persistentvolumeclaim.yaml
+		k8s\eshop-mobileshoppingapigw-deployment.yaml = k8s\eshop-mobileshoppingapigw-deployment.yaml
+		k8s\eshop-mobileshoppingagg-deployment.yaml = k8s\eshop-mobileshoppingagg-deployment.yaml
+		k8s\eshop-identity-api-deployment.yaml = k8s\eshop-identity-api-deployment.yaml
+		k8s\eshop-catalog-api-deployment.yaml = k8s\eshop-catalog-api-deployment.yaml
+		k8s\eshop-basketdata-persistentvolumeclaim.yaml = k8s\eshop-basketdata-persistentvolumeclaim.yaml
+		k8s\eshop-basketdata-deployment.yaml = k8s\eshop-basketdata-deployment.yaml
+		k8s\eshop-basket-api-deployment.yaml = k8s\eshop-basket-api-deployment.yaml
+		k8s\eshop-webstatus-service.yaml = k8s\eshop-webstatus-service.yaml
+		k8s\eshop-webspa-service.yaml = k8s\eshop-webspa-service.yaml
+		k8s\eshop-webshoppingapigw-service.yaml = k8s\eshop-webshoppingapigw-service.yaml
+		k8s\eshop-webshoppingagg-service.yaml = k8s\eshop-webshoppingagg-service.yaml
+		k8s\eshop-webmvc-service.yaml = k8s\eshop-webmvc-service.yaml
+		k8s\eshop-webhooks-client-service.yaml = k8s\eshop-webhooks-client-service.yaml
+		k8s\eshop-webhooks-api-service.yaml = k8s\eshop-webhooks-api-service.yaml
+		k8s\eshop-sqldata-service.yaml = k8s\eshop-sqldata-service.yaml
+		k8s\eshop-seq-service.yaml = k8s\eshop-seq-service.yaml
+		k8s\eshop-rabbitmq-service.yaml = k8s\eshop-rabbitmq-service.yaml
+		k8s\eshop-payment-api-service.yaml = k8s\eshop-payment-api-service.yaml
+		k8s\eshop-ordering-signalrhub-service.yaml = k8s\eshop-ordering-signalrhub-service.yaml
+		k8s\eshop-ordering-backgroundtasks-service.yaml = k8s\eshop-ordering-backgroundtasks-service.yaml
+		k8s\eshop-ordering-api-service.yaml = k8s\eshop-ordering-api-service.yaml
+		k8s\eshop-nosqldata-service.yaml = k8s\eshop-nosqldata-service.yaml
+		k8s\eshop-mobileshoppingapigw-service.yaml = k8s\eshop-mobileshoppingapigw-service.yaml
+		k8s\eshop-mobileshoppingagg-service.yaml = k8s\eshop-mobileshoppingagg-service.yaml
+		k8s\eshop-identity-api-service.yaml = k8s\eshop-identity-api-service.yaml
+		k8s\eshop-catalog-api-service.yaml = k8s\eshop-catalog-api-service.yaml
+		k8s\eshop-basketdata-service.yaml = k8s\eshop-basketdata-service.yaml
+		k8s\eshop-basket-api-service.yaml = k8s\eshop-basket-api-service.yaml
 	EndProjectSection
 EndProject
 Global
@@ -1594,6 +1648,7 @@ Global
 		{373D8AA1-36BE-49EC-89F0-6CB736666285} = {807BB76E-B2BB-47A2-A57B-3D1B20FF5E7F}
 		{95D735BE-2899-4495-BE3F-2600E93B4E3C} = {373D8AA1-36BE-49EC-89F0-6CB736666285}
 		{23C9581B-F153-416A-BE40-202BFED655C2} = {3ABEEE8C-35E0-4185-9825-C44326151F5B}
+		{9384C2E0-5948-4526-B5DE-E08B0723543D} = {932D8224-11F6-4D07-B109-DA28AD288A63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25728519-5F0F-4973-8A64-0A81EB4EA8D9}
