@@ -5,7 +5,8 @@
       "launchBrowser": false,
       "launchUrl": "http://localhost:55101/",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "PORT": "55101"
       }
     },
     "Azure Dev Spaces": {

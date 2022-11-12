@@ -124,6 +124,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{373D8AA1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Tests", "BuildingBlocks\EventBus\EventBus.Tests\EventBus.Tests.csproj", "{95D735BE-2899-4495-BE3F-2600E93B4E3C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webshopping-local", "webshopping-local", "{23C9581B-F153-416A-BE40-202BFED655C2}"
+	ProjectSection(SolutionItems) = preProject
+		ApiGateways\Envoy\config\webshopping-local\envoy.yaml = ApiGateways\Envoy\config\webshopping-local\envoy.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -1588,6 +1593,7 @@ Global
 		{B62E859F-825E-4C8B-93EC-5966EACFD026} = {798BFC44-2CCD-45FA-B37A-5173B03C2B30}
 		{373D8AA1-36BE-49EC-89F0-6CB736666285} = {807BB76E-B2BB-47A2-A57B-3D1B20FF5E7F}
 		{95D735BE-2899-4495-BE3F-2600E93B4E3C} = {373D8AA1-36BE-49EC-89F0-6CB736666285}
+		{23C9581B-F153-416A-BE40-202BFED655C2} = {3ABEEE8C-35E0-4185-9825-C44326151F5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25728519-5F0F-4973-8A64-0A81EB4EA8D9}
