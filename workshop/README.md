@@ -24,6 +24,7 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 ## 3. Run docker-compose
 - Check `src/.env file` for OS-specific settings
 - docker compose up -d
+- Debug local containers using [Rider](https://blog.jetbrains.com/dotnet/2018/07/18/debugging-asp-net-core-apps-local-docker-container/) / [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/containers/edit-and-refresh?view=vs-2022)
 
 ### Issues
 - ❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)
