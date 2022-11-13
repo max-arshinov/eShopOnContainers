@@ -2,8 +2,7 @@
 The compound run configuration is avaialble in `src/.run/All.run.xml`
 
 ## Issues
-- ❌ Dependencies are not installed
-- ✅ Run them in docker
+❌ Dependencies are not installed → ✅ Run them in docker
 
 # 2. Run Redis, DB, and API Gateway in Docker
 ## DB
@@ -18,17 +17,15 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 - `docker run -d --add-host host.docker.internal:host-gateway -v $(pwd)/ApiGateways/Envoy/config/webshopping-local:/etc/envoy -p 5202:80 -p 15202:8001 --name eshop-webshoppingapigw envoyproxy/envoy:v1.11.1`
 
 ## Issues
-- ❌ Where do I put all these scripts?
-- ✅ docker-compose.yml
+❌ Where do I put all these scripts? → ✅ docker-compose.yml
 
 # 3. Run docker-compose
+- Check `src/.env file` for OS-specific settings
 - docker compose up -d
 
 ## Issues
-- ❌ How do I run my setup on multiple machines?
-- ✅ Kubernetes (K8S)!
-- ❌ How do I create K8S config?
-- ✅ [Kompose](http://kompose.io)
+- ❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)
+- ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
 # 4. Convert docker-compose.yml to k8s .yaml files
 - `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert`
@@ -36,8 +33,7 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 - `kubectl apply -f .`
 
 ## Issues
-- ❌ How do I open ports?
-- ✅ Ingress
+❌ How do I open ports? → ✅ Ingress
 
 # 5. Configure Nginx Ingres
 - Uncomment labels in docker-compose.yml
