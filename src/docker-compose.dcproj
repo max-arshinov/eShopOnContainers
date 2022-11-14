@@ -19,7 +19,4 @@
     </None>
     <None Include="docker-compose.yml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="docker-compose-resolved.yml" />
-  </ItemGroup>
 </Project>
