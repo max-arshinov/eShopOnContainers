@@ -34,11 +34,12 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
 - `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert`
+- `update volumes`
 - `cd k8s`
 - `kubectl apply -f .`
 
 ### Issues
-❌ How do I open ports? → ✅ Ingress
+❌ How do I open ports? → ✅ Proxy / Node Ports / Load Balancer / Ingress
 
 ## 5. Configure Nginx Ingres
 - Uncomment labels in docker-compose.yml
