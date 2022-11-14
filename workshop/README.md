@@ -33,7 +33,7 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 - ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
-- `docker-compose config > docker-compose-resolved.yml && kompose -f docker-compose-resolved.yml -f docker-compose.override.yml -o k8s convert`
+- `docker-compose config > docker-compose-resolved.yml && kompose -f docker-compose-resolved.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert`
 - `cd k8s`
 - `kubectl apply -f .`
 

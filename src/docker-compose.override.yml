@@ -12,7 +12,9 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5340:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   sqldata:
     environment:
       - SA_PASSWORD=Pass@word
@@ -21,13 +23,17 @@ services:
       - "5433:1433"
     volumes:
       - eshop-sqldata:/var/opt/mssql
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   nosqldata:
     ports:
       - "27017:27017"
     volumes:
       - eshop-nosqldata:/data/db
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   basketdata:
     ports:
       - "6379:6379"
@@ -37,7 +43,9 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   identity-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -57,7 +65,9 @@ services:
       - OrchestratorType=${ORCHESTRATOR_TYPE}
     ports:
       - "5105:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   basket-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -78,11 +88,13 @@ services:
     ports:
       - "5103:80"
       - "9103:81"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   catalog-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
       - PicBaseUrl=${ESHOP_STORAGE_CATALOG_URL}
       - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
       - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
@@ -100,7 +112,9 @@ services:
     ports:
       - "5101:80"
       - "9101:81"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   ordering-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -125,7 +139,9 @@ services:
     ports:
       - "5102:80"
       - "9102:81"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   ordering-backgroundtasks:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -144,7 +160,9 @@ services:
       - Serilog__MinimumLevel__Override__Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ=Verbose
     ports:
       - "5111:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   payment-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -159,7 +177,9 @@ services:
       - Serilog__MinimumLevel__Override__Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ=Verbose
     ports:
       - "5108:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   webhooks-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -172,21 +192,27 @@ services:
       - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
     ports:
       - "5113:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   mobileshoppingapigw:
     volumes:
       - ./ApiGateways/Envoy/config/mobileshopping:/etc/envoy
     ports:
       - "5200:80"
       - "15200:8001"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   webshoppingapigw:
     volumes:
       - ./ApiGateways/Envoy/config/webshopping:/etc/envoy
     ports:
       - "5202:80"
       - "15202:8001"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   mobileshoppingagg:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -205,7 +231,9 @@ services:
       - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
     ports:
       - "5120:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   webshoppingagg:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -224,7 +252,9 @@ services:
       - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
     ports:
       - "5121:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   ordering-signalrhub:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -238,7 +268,9 @@ services:
       - identityUrl=http://identity-api
     ports:
       - "5112:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      
   webstatus:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -269,7 +301,10 @@ services:
       - OrchestratorType=${ORCHESTRATOR_TYPE}
     ports:
       - "5107:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      kompose.service.expose: true
+      
   webspa:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -283,7 +318,10 @@ services:
       - SignalrHubUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5202
     ports:
       - "5104:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      kompose.service.expose: true
+      
   webmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -298,7 +336,10 @@ services:
       - UseLoadTest=${USE_LOADTEST:-False}
     ports:
       - "5100:80"
-
+    labels:
+      kompose.service.type: LoadBalancer
+      kompose.service.expose: true
+  
   webhooks-client:
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -309,6 +350,9 @@ services:
       - SelfUrl=http://webhooks-client/
     ports:
       - "5114:80"
+    labels:
+      kompose.service.type: LoadBalancer
+      
 volumes:
   eshop-sqldata:
     external: false

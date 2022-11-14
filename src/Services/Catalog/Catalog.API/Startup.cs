@@ -168,6 +168,7 @@ public static class CustomExtensionMethods
 
     public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
     {
+        Log.Information("Connection string: {@ConnectionString}", configuration["ConnectionString"]);
         services.AddEntityFrameworkSqlServer()
             .AddDbContext<CatalogContext>(options =>
         {
