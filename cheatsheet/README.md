@@ -7,13 +7,13 @@
 | API Gateway | `docker run -d --add-host host.docker.internal:host-gateway -v $(pwd)/ApiGateways/Envoy/config/webshopping-local:/etc/envoy -p 5202:80 -p 15202:8001 --name eshop-webshoppingapigw envoyproxy/envoy:v1.11.1`    |
 
 ## K8S
-| Action                                          | Command                                                                                                                                  |
-|-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| Convert docker-compose to k8s .yaml files       | `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert`                                                                   |
-| Apply all yaml files from the current directory | `kubectl apply -f .`                                                                                                                     |
-| Install the NGINX Ingress controller            | `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml` |
-| To check the public service exposed             | `kubectl get ing`                                                                                                                        |
-| Check Deployment Status                         | `kubectl get deployment  `                                                                                                               |
+| Action                                          | Command                                                                                                                                       |
+|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| Convert docker-compose to k8s .yaml files       | `docker-compose config > docker-compose-resolved.yml && kompose -f docker-compose-resolved.yml -f docker-compose.override.yml -o k8s convert` |
+| Apply all yaml files from the current directory | `kubectl apply -f .`                                                                                                                          |
+| Install the NGINX Ingress controller            | `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml`      |
+| To check the public service exposed             | `kubectl get ing`                                                                                                                             |
+| Check Deployment Status                         | `kubectl get deployment  `                                                                                                                    |
 
 docker-compose config > docker-compose-resolved.yaml && kompose convert -f docker-compose-resolved.yaml
 

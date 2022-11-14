@@ -1,6 +1,8 @@
 # Worksop Steps
 
-## 1. Run locally with Compound Rider Configuration
+## Prerequisites
+
+## 1. Run all services using Rider Compound Configuration
 The compound run configuration is avaialble in `src/.run/All.run.xml`
 
 ### Issues
@@ -21,7 +23,7 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 ### Issues
 ❌ Where do I put all these scripts? → ✅ docker-compose.yml
 
-## 3. Run docker-compose
+## 3. Run [docker compose](https://docs.docker.com/compose/gettingstarted/)
 - Check `src/.env file` for OS-specific settings
 - docker compose up -d
 - Debug local containers using [Rider](https://blog.jetbrains.com/dotnet/2018/07/18/debugging-asp-net-core-apps-local-docker-container/) / [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/containers/edit-and-refresh?view=vs-2022)
@@ -30,8 +32,8 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 - ❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)
 - ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
-## 4. Convert docker-compose.yml to k8s .yaml files
-- `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s convert`
+## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
+- `docker-compose config > docker-compose-resolved.yml && kompose -f docker-compose-resolved.yml -f docker-compose.override.yml -o k8s convert`
 - `cd k8s`
 - `kubectl apply -f .`
 
