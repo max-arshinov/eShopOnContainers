@@ -37,11 +37,10 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 - `update volumes`
 - `cd k8s`
 - `kubectl apply -f .`
+- `fix env var for a health-check and redeploy`
 
 ### Issues
 ❌ How do I open ports? → ✅ Proxy / Node Ports / Load Balancer / Ingress
 
 ## 5. Configure Nginx Ingres
-- Uncomment labels in docker-compose.yml
-- `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml` |
-- Update `etc/hosts` files if needed
+- Follow [Deploy to local K8S](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Local-Kubernetes#Install-NGINX-Ingress-Controller)
