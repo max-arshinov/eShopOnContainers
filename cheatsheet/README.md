@@ -16,6 +16,7 @@
 | Check Deployment Status                         | `kubectl get deployment  `                                                                                                                    |
 
 docker-compose config > docker-compose-resolved.yaml && kompose convert -f docker-compose-resolved.yaml
+kubectl delete all  --all -n ingress-nginx
 
 # Helm
 | Action                              | Command                                                                                              |

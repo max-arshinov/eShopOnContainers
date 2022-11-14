@@ -12,8 +12,6 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5340:80"
-    labels:
-      kompose.service.type: LoadBalancer
       
   sqldata:
     environment:
@@ -94,7 +92,7 @@ services:
   catalog-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
       - PicBaseUrl=${ESHOP_STORAGE_CATALOG_URL}
       - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
       - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
@@ -114,7 +112,7 @@ services:
       - "9101:81"
     labels:
       kompose.service.type: LoadBalancer
-      
+    
   ordering-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -202,7 +200,7 @@ services:
       - "5200:80"
       - "15200:8001"
     labels:
-      kompose.service.type: LoadBalancer
+      kompose.service.type: LoadBalancer 
       
   webshoppingapigw:
     volumes:
@@ -211,7 +209,7 @@ services:
       - "5202:80"
       - "15202:8001"
     labels:
-      kompose.service.type: LoadBalancer
+      kompose.service.type: LoadBalancer      
       
   mobileshoppingagg:
     environment:
@@ -232,7 +230,7 @@ services:
     ports:
       - "5120:80"
     labels:
-      kompose.service.type: LoadBalancer
+      kompose.service.type: LoadBalancer      
       
   webshoppingagg:
     environment:
@@ -253,7 +251,7 @@ services:
     ports:
       - "5121:80"
     labels:
-      kompose.service.type: LoadBalancer
+      kompose.service.type: LoadBalancer      
       
   ordering-signalrhub:
     environment:
@@ -269,7 +267,7 @@ services:
     ports:
       - "5112:80"
     labels:
-      kompose.service.type: LoadBalancer
+      kompose.service.type: LoadBalancer      
       
   webstatus:
     environment:
@@ -301,9 +299,8 @@ services:
       - OrchestratorType=${ORCHESTRATOR_TYPE}
     ports:
       - "5107:80"
-    labels:
-      kompose.service.type: LoadBalancer
-      kompose.service.expose: true
+    labels:       
+      kompose.service.type: LoadBalancer       
       
   webspa:
     environment:
@@ -319,8 +316,7 @@ services:
     ports:
       - "5104:80"
     labels:
-      kompose.service.type: LoadBalancer
-      kompose.service.expose: true
+      kompose.service.type: LoadBalancer      
       
   webmvc:
     environment:
@@ -337,8 +333,7 @@ services:
     ports:
       - "5100:80"
     labels:
-      kompose.service.type: LoadBalancer
-      kompose.service.expose: true
+      kompose.service.type: LoadBalancer  
   
   webhooks-client:
     environment:
