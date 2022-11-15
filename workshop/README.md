@@ -1,6 +1,11 @@
 # Worksop Steps
 
 ## Prerequisites
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Docker Engine](https://docs.docker.com/engine/install/) and [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+- Install JetBrains [Rider](https://www.jetbrains.com/rider/), [VS 2022](https://visualstudio.microsoft.com/vs/), or [VS Code](https://code.visualstudio.com/)
+- Install [NodeJs](https://nodejs.org/)
+- Clone this repository
+- Follow the [slides](https://docs.google.com/presentation/d/1Rg07RdJfuUJ4KqJxtTXw7TEw9VZEQuAZ0z4pPWb5NmU/edit?usp=sharing) and steps from this document along with the workshop presenter 
 
 ## 1. Run all services using Rider Compound Configuration
 The compound run configuration is avaialble in `src/.run/All.run.xml`
