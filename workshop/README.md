@@ -41,7 +41,7 @@
 ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
-- <mark>make sure that env variables from below are initialised. Kompose doesn't support .env file :(</mark>
+- <mark>make sure that env variables from below are initialised. Kompose doesn't support .env file</mark> 😢
 - Set up env variables in .zshrc file on Mac. On Windows use either of these two guides: [1](http://www.dowdandassociates.com/blog/content/howto-set-an-environment-variable-in-windows-command-line-and-registry/), [2](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html) 
 ```
 # .zshrc on mac
