@@ -61,7 +61,7 @@ export ESHOP_AZURE_WEBHOOKS_DB="Server=docker.for.mac.localhost,5433;Database=Mi
 - `fix env var for a health-check and redeploy`
 
 ### Issues
-❌ How do I open ports? → ✅ Proxy / Node Ports / Load Balancer / Ingress
+❌ How do I open ports? → ✅ [Proxy / Node Ports / Load Balancer / Ingress](https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0)
 
 ## 5. Configure Nginx Ingres and use Helm
 - Follow [Deploy to local K8S](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Local-Kubernetes#Install-NGINX-Ingress-Controller)
