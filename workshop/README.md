@@ -5,6 +5,20 @@
 - Install JetBrains [Rider](https://www.jetbrains.com/rider/), [VS 2022](https://visualstudio.microsoft.com/vs/), or [VS Code](https://code.visualstudio.com/)
 - Install [NodeJs](https://nodejs.org/)
 - Clone this repository
+- Set up env variables in .zshrc file on Mac. On Windows use either of these two guides: [1](http://www.dowdandassociates.com/blog/content/howto-set-an-environment-variable-in-windows-command-line-and-registry/), [2](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html) 
+```
+# .zshrc on mac
+# use host.docker.internal instead of docker.for.mac.localhost for windows
+export COMPOSE_PROJECT_NAME=eshop
+export ESHOP_EXTERNAL_DNS_NAME_OR_IP=docker.for.mac.localhost
+export ESHOP_STORAGE_CATALOG_URL=http://docker.for.mac.localhost:5202/c/api/v1/catalog/items/[0]/pic/
+export ESHOP_AZURE_SERVICE_BUS=docker.for.mac.localhost
+
+export ESHOP_AZURE_CATALOG_DB="Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Service.CatalogDb;User Id=sa;Password=Pass@word"
+export ESHOP_AZURE_IDENTITY_DB="Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=Pass@word"
+export ESHOP_AZURE_ORDERING_DB="Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word"
+export ESHOP_AZURE_WEBHOOKS_DB="Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=Pass@word"
+```
 - Follow the [slides](https://docs.google.com/presentation/d/1Rg07RdJfuUJ4KqJxtTXw7TEw9VZEQuAZ0z4pPWb5NmU/edit?usp=sharing) and steps from this document along with the workshop presenter 
 
 ## 1. Run all services using Rider Compound Configuration
@@ -38,6 +52,7 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
+- <mark>make sure that env variables from the Prerequisites section are initialised. Kompose doesn't support .env file</mark>
 - `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert`
 - `update volume configs: eshop-sqldata, eshop-nosqldata, eshop-basketdata`
 - `cd k8s`
