@@ -49,7 +49,7 @@ export ESHOP_AZURE_WEBHOOKS_DB="Server=docker.for.mac.localhost,5433;Database=Mi
 - Debug local containers using [Rider](https://blog.jetbrains.com/dotnet/2018/07/18/debugging-asp-net-core-apps-local-docker-container/) / [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/containers/edit-and-refresh?view=vs-2022)
 
 ### Issues
-❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)
+❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)<br/>
 ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
