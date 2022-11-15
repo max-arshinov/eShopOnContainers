@@ -47,5 +47,5 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 ### Issues
 ❌ How do I open ports? → ✅ Proxy / Node Ports / Load Balancer / Ingress
 
-## 5. Configure Nginx Ingres
+## 5. Configure Nginx Ingres and use Helm
 - Follow [Deploy to local K8S](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Local-Kubernetes#Install-NGINX-Ingress-Controller)
