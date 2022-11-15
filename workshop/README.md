@@ -34,8 +34,8 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 - Debug local containers using [Rider](https://blog.jetbrains.com/dotnet/2018/07/18/debugging-asp-net-core-apps-local-docker-container/) / [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/containers/edit-and-refresh?view=vs-2022)
 
 ### Issues
-- ❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)
-- ❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
+❌ How do I run my setup on multiple machines? → ✅ Kubernetes (K8S)
+❌ How do I create K8S config? → ✅ [Kompose](http://kompose.io)
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
 - `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert`
