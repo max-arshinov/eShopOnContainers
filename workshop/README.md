@@ -65,3 +65,11 @@ export ESHOP_AZURE_WEBHOOKS_DB="Server=docker.for.mac.localhost,5433;Database=Mi
 
 ## 5. Configure Nginx Ingres and use Helm
 - Follow [Deploy to local K8S](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Local-Kubernetes#Install-NGINX-Ingress-Controller)
+
+
+---
+## What was changed in this fork
+- Updated Protobuf/gRPC packages to the latest version to fix the build
+- `npm i` replaced with `npm i --legacy-peer-deps` to fix the build; npm is awesome for sure
+- Replaced sql database container with azure-sql-edge, because sql-server is not supported on ARM Macs
+- Updated docker-compose.yml to improve default kompose output
