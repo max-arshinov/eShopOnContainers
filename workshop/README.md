@@ -35,7 +35,7 @@ export ESHOP_AZURE_WEBHOOKS_DB="Server=docker.for.mac.localhost,5433;Database=Mi
 
 ### RabbitMQ
 - `docker pull rabbitmq`
-- `docker run -p 15672:15672 -p 5672:5672 --name rabbitmq -d eshop-rabbitmq:3-management`
+- `docker run -p 15672:15672 -p 5672:5672 --name rabbitmq -d rabbitmq:3-management`
 
 ### Envoy API Gateway
 - `docker run -d --add-host host.docker.internal:host-gateway -v $(pwd)/ApiGateways/Envoy/config/webshopping-local:/etc/envoy -p 5202:80 -p 15202:8001 --name eshop-webshoppingapigw envoyproxy/envoy:v1.11.1`
