@@ -39,7 +39,7 @@ The compound run configuration is avaialble in `src/.run/All.run.xml`
 
 ## 4. Convert docker-compose.yml to k8s .yaml files using [Kompose](https://kompose.io/)
 - `kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert`
-- `update volumes`
+- `update volume configs: eshop-sqldata, eshop-nosqldata, eshop-basketdata`
 - `cd k8s`
 - `kubectl apply -f .`
 - `fix env var for a health-check and redeploy`
