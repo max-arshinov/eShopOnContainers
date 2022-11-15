@@ -22,7 +22,8 @@ export ESHOP_AZURE_WEBHOOKS_DB="Server=docker.for.mac.localhost,5433;Database=Mi
 - Follow the [slides](https://docs.google.com/presentation/d/1Rg07RdJfuUJ4KqJxtTXw7TEw9VZEQuAZ0z4pPWb5NmU/edit?usp=sharing) and steps from this document along with the workshop presenter 
 
 ## 1. Run all services using Rider Compound Configuration
-The compound run configuration is avaialble in `src/.run/All.run.xml`
+- Skip this step if you have VS 2022 or VS Code
+- The compound run configuration is avaialble in `src/.run/All.run.xml`
 
 ### Issues
 ❌ Dependencies are not installed → ✅ Run them in docker
