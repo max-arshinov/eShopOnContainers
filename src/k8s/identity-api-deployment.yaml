@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: identity-api
+  name: identity-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: identity-api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert
+        kompose.service.type: LoadBalancer
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: identity-api
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:80
+            - name: ApplicationInsights__InstrumentationKey
+            - name: BasketApiClient
+              value: http://docker.for.mac.localhost:5103
+            - name: ConnectionString
+              value: Server=docker.for.mac.localhost,5433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=Pass@word
+            - name: MobileShoppingAggClient
+              value: http://docker.for.mac.localhost:5120
+            - name: MvcClient
+              value: http://docker.for.mac.localhost:5100
+            - name: OrchestratorType
+            - name: OrderingApiClient
+              value: http://docker.for.mac.localhost:5102
+            - name: SpaClient
+              value: http://docker.for.mac.localhost:5104
+            - name: UseCustomizationData
+              value: "True"
+            - name: WebShoppingAggClient
+              value: http://docker.for.mac.localhost:5121
+            - name: WebhooksApiClient
+              value: http://docker.for.mac.localhost:5113
+            - name: WebhooksWebClient
+              value: http://docker.for.mac.localhost:5114
+            - name: XamarinCallback
+              value: http://:5105/xamarincallback
+          image: eshop/identity.api:linux-latest
+          name: identity-api
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: basket-api
+  name: basket-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: basket-api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml -o k8s --volumes hostPath convert
+        kompose.service.type: LoadBalancer
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: basket-api
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:80
+            - name: ApplicationInsights__InstrumentationKey
+            - name: AzureServiceBusEnabled
+              value: "False"
+            - name: ConnectionString
+              value: basketdata
+            - name: EventBusConnection
+              value: docker.for.mac.localhost
+            - name: EventBusPassword
+            - name: EventBusUserName
+            - name: GRPC_PORT
+              value: "81"
+            - name: IdentityUrlExternal
+              value: http://docker.for.mac.localhost:5105
+            - name: OrchestratorType
+            - name: PATH_BASE
+              value: /basket-api
+            - name: PORT
+              value: "80"
+            - name: UseLoadTest
+              value: "False"
+            - name: identityUrl
+              value: http://identity-api
+          image: eshop/basket.api:linux-latest
+          name: basket-api
+          ports:
+            - containerPort: 80
+            - containerPort: 81
+          resources: {}
+      restartPolicy: Always
+status: {}
